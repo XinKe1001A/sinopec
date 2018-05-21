@@ -45,12 +45,12 @@ function deleteattr(id,i){
 }
 //新增属性确认
 function addconfirm(i){
-	//alert(i);
+	//alert($("#nodeID").html());
 	$.ajax({
         url : '/sinopec-manager-web/insertAttribute',
         type : "post",
         data : {
-        	DataclassId:$("#"+i+">.DataclassId").html(),
+        	DataclassId:$("#nodeID").html(),
         	name:$("#"+i+">.name>#nameinput").val(),
         	priority:0,//优先级暂时没有让用户填写
         	note:$("#"+i+">.note>#noteinput").val(),
@@ -71,7 +71,7 @@ function addconfirm(i){
         	$("#"+i+">.operation").html(str);
     				
         },
-        error : function(msg) {
+        error : function() {
         			alert("添加失败!","提示信息");
         }
 }); 
@@ -79,6 +79,7 @@ function addconfirm(i){
 }
 //新增属性
 function addattr(){
+	
 	//alert($("#ID").html());
 	var tb = document.getElementById("attrtable"); 
 	var newTr = tb.insertRow(1);//添加新行，trIndex就是要添加的位置 
@@ -225,12 +226,13 @@ function zTreeBeforeClick(treeId, treeNode, clickFlag) {
         	},
         success : function(attrList) {
         	$("#attrTable").empty();
+        	var str = "<input id='add' type='button' value='新增属性' onclick=\"addattr('"+"')\">" +
+			"<table id='attrtable' border='4'>";
+	str+="<tr><td>属性名</td><td style='width:200px'>备注</td><td>操作</td></tr>";
         	if(attrList.length!=0){
         		//alert(attrList[0].name);
         		
-        		var str = "<input id='add' type='button' value='新增属性' onclick=\"addattr('"+"')\">" +
-        				"<table id='attrtable' border='4'>";
-        		str+="<tr><td>属性名</td><td style='width:200px'>备注</td><td>操作</td></tr>";
+        		
         		for(var i=0;i<attrList.length;i++){
         			str+= "<tr id = " +i+">";
         			str+="<td class='id' style='display:none'>"+attrList[i].id+"</td>"
@@ -244,14 +246,21 @@ function zTreeBeforeClick(treeId, treeNode, clickFlag) {
         			str+= "</tr>";
         		}
         		str+="</table>";
-        		$("#attrTable").append(str);
+        		
         	}
-        	
+        	$("#attrTable").append(str);
         },
         error : function(msg) {
         			alert("获取数据失败!","提示信息");
         }
 }); 
+	var zTree = $.fn.zTree.getZTreeObj("tree");
+    if (treeNode.isParent) {
+        zTree.expandNode(treeNode);
+        return false;
+    } else {
+        return true;
+    }
     return (treeNode.id !== 1);
 };
 var log, className = "dark";
@@ -328,7 +337,7 @@ function addHoverDom(treeId, treeNode) {
 	var sObj = $("#" + treeNode.tId + "_span");
 	if (treeNode.editNameFlag || $("#addBtn_"+treeNode.id).length>0) return;
 	var addStr = "<span class='button add' id='addBtn_" + treeNode.id
-		+ "' title='add node' onfocus='this.blur();'></span>";
+		+ "' title='增加子节点' onfocus='this.blur();'></span>";
 	sObj.after(addStr);
 	var btn = $("#addBtn_"+treeNode.id);
 	

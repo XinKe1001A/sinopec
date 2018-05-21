@@ -154,7 +154,7 @@ public class BaseDataServiceImpl implements BaseDataService{
 		dataclass.setCreatoinTime(new Timestamp(new Date().getTime()));
 		// 一下字段需要访问session中的账号信息
 		// creationAccountName
-		dataclass.setCreationAccountId(0L);
+		dataclass.setCreationAccountId(1L);
 		
 		dataclassDAO.save(dataclass);
 		return true;
@@ -194,7 +194,7 @@ public class BaseDataServiceImpl implements BaseDataService{
 		dataclass.setCreatoinTime(new Timestamp(new Date().getTime()));
 		// 以下字段需要从session中获取Account信息
 		// creationAccountName
-		dataclass.setCreationAccountId(0L);
+		dataclass.setCreationAccountId(1L);
 		
 		dataclassDAO.save(dataclass);
 		//System.out.println("新增ID： " + dataclass.getId());

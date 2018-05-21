@@ -17,7 +17,7 @@
      <div class="box">
     
          <div class="image_box">
-	           <img alt="" src="static/css/images/0.jpg">
+	           <img alt="" src="static/css/images/home.jpg">
          </div>
          
          <div class="menu_box">
