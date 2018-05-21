@@ -40,7 +40,7 @@ import com.oil.service.userconfig.UserConfigService;
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
 //加载配置文件，可以指定多个配置文件，locations指定的是一个数组
-@ContextConfiguration(locations={"classpath:applicationContext-dao.xml","classpath:applicationContext-service.xml","classpath:applicationContext-tx.xml"})
+@ContextConfiguration(locations={"classpath:applicationContext-dao.xml","classpath:applicationContext-service.xml","classpath:applicationContext-junit.xml"})
 //启动事务控制
 @Transactional
 //配置事务管理器，同时指定自动回滚
@@ -119,20 +119,21 @@ public void testMyService(){
 //	System.out.println(ja1.toString());
 //	valueService.addBaseValueByAttribute((long) 1, (long) 12, jaList.toString());
 	
-//	List<String>jsonList=new ArrayList<String>();
-//	JSONObject json1=new JSONObject();
-//	json1.put("AttributesId", 26);
-//	json1.put("ValueId", 30);
-//	json1.put("Value","琨哥牌");
-//	json1.put("note", "新备注1");
+	List<String>jsonList=new ArrayList<String>();
+	JSONObject json1=new JSONObject();
+	json1.put("AttributesId", 26);
+	json1.put("ValueId", 30);
+//	json1.put("ValueId", -1);
+	json1.put("Value","刘瑞帅哥");
+	json1.put("note", "我放心");
 //	JSONObject json2=new JSONObject();
 //	json2.put("AttributesId", 27);
 //	json2.put("ValueId", 31);
 //	json2.put("Value","abc001");
 //	json2.put("note", "新备注2");
-//	jsonList.add(json1.toJSONString());
+	jsonList.add(json1.toJSONString());
 //	jsonList.add(json2.toJSONString());
-//	valueService.EditBaseValueByValueId((long) 309,jsonList.toString());
+	valueService.EditBaseValueByValueId((long) 309,jsonList.toString());
 	
 //	valueService.deleteBaseValueByInsId((long) 308);
 	
@@ -147,6 +148,6 @@ public void testMyService(){
 //	System.out.println(	valueService.takeBaseValueByOrgsAndClasses(list1, list2));
 	
 //	System.out.println(valueService.getUnFilledDataClasses());
-	userConfigService.getAccountByAccountName("yejun");
+//	userConfigService.getAccountByAccountName("yejun");
 }
 }

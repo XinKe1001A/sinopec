@@ -64,7 +64,10 @@ public class ValueDAO {
 		}
 	}
 	public void update(Value o) {
-		this.getCurrentSession().update(o);
+		this.getCurrentSession().update(o);	
+	}
+	public void flush(){
+		this.getCurrentSession().flush();
 	}
 	public void delete(Value persistentInstance) {
 		log.debug("deleting Value instance");

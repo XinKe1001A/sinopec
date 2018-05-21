@@ -179,7 +179,8 @@ public class BaseValueServiceImpl implements BaseValueService{
 				Value value=valueDAO.findById(vid);
 				value.setValue(valueStr);
 				value.setNote(noteStr);
-				valueDAO.update(value);
+//				valueDAO.update(value);
+				valueDAO.flush();
 			}
 
 		}
